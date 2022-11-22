@@ -71,14 +71,15 @@ void BSTNode<T>::setItem(T item)
 template <class T>
 BSTNode<T>::BSTNode()
 {
-	
+	parent = left = right = nullptr;
 }
 
 
 template <class T>
 BSTNode<T>::BSTNode(T data)
 {
-	
+	this->data = data;
+	parent = left = right = nullptr;
 }
 template <class T>
 int BSTNode<T>::count()
@@ -89,7 +90,34 @@ int BSTNode<T>::count()
 template <class T>
 void BSTNode<T>::add(T item)
 {
-	
+	if (data == item)
+	{
+		return;
+	}
+	if (item < data)
+	{
+		if (left == nullptr)
+		{
+			left = new BSTNode<T>(item);
+			left->parent = this;
+		}
+		else
+		{
+			left->add(item);
+		}
+	}
+	else
+	{
+		if (right == nullptr)
+		{
+			right = new BSTNode<T>(item);
+			right->parent = this;
+		}
+		else
+		{
+			right->add(item);
+		}
+	}
 }
 
 

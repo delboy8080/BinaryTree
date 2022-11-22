@@ -43,7 +43,7 @@ int BinaryTree<T>::count()
 template <class T>
 bool BinaryTree<T>::remove(T item)
 {
-
+	return false;
 }
 
 
