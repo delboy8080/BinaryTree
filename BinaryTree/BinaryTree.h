@@ -33,16 +33,94 @@ BinaryTree<T>::BinaryTree()
 template <class T>
 void BinaryTree<T>::add(T item)
 {
-	
+	if (root == nullptr)
+	{
+		root = new BSTNode<T>(item);
+	}
+	else
+	{
+		root->add(item);
+	}
 }
 template <class T>
 int BinaryTree<T>::count()
 {
-	return 0;
+	if (root == nullptr)
+		return 0;
+	return root->count();
 }
 template <class T>
 bool BinaryTree<T>::remove(T item)
 {
+	BSTNode<T>* toBeRemoved = root;
+	BSTNode<T>* parent = nullptr;
+	bool found = false;
+	while (!found && toBeRemoved != nullptr)
+	{
+		if (toBeRemoved->getItem() == item)
+		{
+			found = true;
+		}
+		else
+		{
+			parent = toBeRemoved;
+			if (item < toBeRemoved->getItem())
+				toBeRemoved = toBeRemoved->getLeft();
+			else
+				toBeRemoved = toBeRemoved->getRight();
+		}
+		
+	}
+	if (!found)
+		return false;
+
+	if (toBeRemoved->getLeft() == nullptr || toBeRemoved->getRight() == nullptr)
+	{
+		BSTNode<T>* newChild;
+		if (toBeRemoved->getLeft() == nullptr)
+		{
+			newChild = toBeRemoved->getRight();
+		}
+		else
+		{
+			newChild = toBeRemoved->getLeft();
+		}
+
+		if (parent == nullptr)
+		{
+			root = newChild;
+		}
+		else if (parent->getLeft() == toBeRemoved)
+		{
+			parent->setLeft(newChild);
+		}
+		else
+		{
+			parent->setRight(newChild);
+		}
+		return true;
+	}
+	else
+	{
+		BSTNode<T>* smallestParent = toBeRemoved;
+		BSTNode<T>* smallest = toBeRemoved->getRight();
+		while (smallest->getLeft() != nullptr)
+		{
+			smallestParent = smallest;
+			smallest = smallest->getLeft();
+		}
+		toBeRemoved->setItem(smallest->getItem());
+		if (smallestParent == toBeRemoved)
+		{
+			smallestParent->setRight(smallest->getRight());
+		}
+		else
+		{			
+			smallestParent->setLeft(smallest->getRight());
+		}
+
+	}
+
 	return false;
 }
 

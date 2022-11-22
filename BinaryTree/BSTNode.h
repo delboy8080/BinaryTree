@@ -84,7 +84,12 @@ BSTNode<T>::BSTNode(T data)
 template <class T>
 int BSTNode<T>::count()
 {
-	return 0;
+	int c = 1;
+	if (left != nullptr)
+		c += left->count();
+	if (right != nullptr)
+		c += right->count();
+	return c;
 }
 
 template <class T>

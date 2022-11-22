@@ -119,11 +119,11 @@ namespace TestBinaryTree
 		/*
 		Test the remove function to try and remove a leaf node
 		to test this we will use the following tree
-		4
+		 4
 		/ \
 		2   6
-		/ \ / \
-		1 3 5  7
+	   / \ / \
+	   1 3 5  7
 		*/
 
 		TEST_METHOD(TestRemoveLeafNode)
@@ -231,6 +231,16 @@ namespace TestBinaryTree
 		   2   6      10   14
 		  / \ / \    / \  / \
 		 1  3 5  7  9  11 13 15
+
+		          8
+			    /    \
+			   /      \
+			  /        \ 
+			 4          12
+			/ \        /   \
+		   2   6      10   14
+		  / \ / \    / \    \
+		 1  3 5  7  9  11    15
 
 		 When we remove a node in the middle of the tree, the algorithm
 		 should move the next lowest item up to the place of the removed node.
